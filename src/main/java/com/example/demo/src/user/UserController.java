@@ -3,6 +3,7 @@ package com.example.demo.src.user;
 
 import com.example.demo.common.Constant.SocialLoginType;
 import com.example.demo.common.oauth.OAuthService;
+import com.example.demo.src.user.entity.User;
 import com.example.demo.utils.JwtService;
 import lombok.RequiredArgsConstructor;
 import com.example.demo.common.exceptions.BaseException;
@@ -132,6 +133,12 @@ public class UserController {
     public BaseResponse<PostLoginRes> logIn(@RequestBody PostLoginReq postLoginReq){
         // TODO: 로그인 값들에 대한 형식적인 validatin 처리해주셔야합니다!
         // TODO: 유저의 status ex) 비활성화된 유저, 탈퇴한 유저 등을 관리해주고 있다면 해당 부분에 대한 validation 처리도 해주셔야합니다.
+        if(postLoginReq.getEmail()==null || postLoginReq.getEmail().isEmpty()){ //이메일이 비어있다면
+            return new BaseResponse<>(USERS_EMPTY_EMAIL);
+        }
+        if(!isRegexEmail(postLoginReq.getEmail())){
+            return new BaseResponse<>(POST_USERS_INVALID_EMAIL);
+        }
         PostLoginRes postLoginRes = userService.logIn(postLoginReq);
         return new BaseResponse<>(postLoginRes);
     }
