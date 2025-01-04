@@ -12,8 +12,9 @@ public enum BaseResponseStatus {
      * 200 : 요청 성공
      */
     SUCCESS(true, HttpStatus.OK.value(), "요청에 성공하였습니다."),
-
-
+    USER_INACTIVE(true, HttpStatus.OK.value(), "고객님의 ID는 휴먼 상태입니다. 해제하시겠습니까?"),
+    USER_BLOCK(true, HttpStatus.OK.value(), "고객님의 ID는 차단 상태입니다?"),
+    USER_WITHDRAW(true, HttpStatus.OK.value(), "고객님의 ID는 차단 상태입니다. 해제하시겠습니까?"),
     /**
      * 400 : Request, Response 오류
      */

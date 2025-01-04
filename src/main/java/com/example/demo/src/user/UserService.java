@@ -21,8 +21,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import static com.example.demo.common.entity.BaseEntity.State.ACTIVE;
-import static com.example.demo.common.entity.BaseEntity.State.INACTIVE;
+import static com.example.demo.common.entity.BaseEntity.State.*;
 import static com.example.demo.common.response.BaseResponseStatus.*;
 
 // Service Create, Update, Delete 의 로직 처리
@@ -107,15 +106,23 @@ public class UserService {
     }
 
     public PostLoginRes logIn(PostLoginReq postLoginReq) {
-        User user = userRepository.findByEmailAndState(postLoginReq.getEmail(), ACTIVE) //만약 Active 상태이면서 이메일이 존재하면 유저를 반환 아니면 반환하지 않는다.
+        User user = userRepository.findByEmail(postLoginReq.getEmail()) //만약 Active 상태이면서 이메일이 존재하면 유저를 반환 아니면 반환하지 않는다.
                 .orElseThrow(() -> new BaseException(NOT_FIND_USER));
         String encryptPwd;
+        if(user.getState() == INACTIVE){
+            throw new BaseException(USER_INACTIVE);
+        }
+        else if(user.getState() == BLOCK){
+            throw new BaseException(USER_BLOCK);
+        }
+        else if(user.getState() == WITHDRAW){
+            throw new BaseException(USER_WITHDRAW);
+        }
         try {
             encryptPwd = new SHA256().encrypt(postLoginReq.getPassword());
         } catch (Exception exception) {
             throw new BaseException(PASSWORD_ENCRYPTION_ERROR);
         }
-
         if(user.getPassword().equals(encryptPwd)){
             Long userId = user.getId();
             String jwt = jwtService.createJwt(userId);
