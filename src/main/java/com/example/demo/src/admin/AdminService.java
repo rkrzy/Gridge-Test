@@ -4,6 +4,7 @@ import com.example.demo.common.entity.BaseEntity;
 import com.example.demo.common.exceptions.BaseException;
 import com.example.demo.common.response.BaseResponseStatus;
 import com.example.demo.src.admin.model.AdminPostRes;
+import com.example.demo.src.admin.model.PostDetailRes;
 import com.example.demo.src.admin.model.UserDetailRes;
 import com.example.demo.src.post.PostRepository;
 import com.example.demo.src.post.entity.Post;
@@ -121,6 +122,18 @@ public class AdminService {
         return posts.stream()
                 .map(AdminPostRes::new)
                 .collect(Collectors.toList());
+
+    }
+    public PostDetailRes getPostDetail(Long id)
+    {
+        Post post = postRepository.findById(id).orElseThrow(() -> new BaseException(NOT_FIND_USER));
+        return new PostDetailRes(post);
+    }
+    public void deletePost(Long id)
+    {
+        Post post = postRepository.findById(id)
+                .orElseThrow(() -> new BaseException(NOT_FIND_USER));
+        post.deletePost();
 
     }
 }

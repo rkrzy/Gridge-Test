@@ -5,6 +5,7 @@ import com.example.demo.common.entity.BaseEntity;
 import com.example.demo.common.response.BaseResponse;
 import com.example.demo.common.response.BaseResponseStatus;
 import com.example.demo.src.admin.model.AdminPostRes;
+import com.example.demo.src.admin.model.PostDetailRes;
 import com.example.demo.src.admin.model.UserDetailRes;
 import com.example.demo.src.user.model.GetUserRes;
 import lombok.RequiredArgsConstructor;
@@ -84,5 +85,19 @@ public class AdminController {
         List<AdminPostRes> adminPostRes = adminService.getPostsByCondition(id, createdTime, state);
         return new BaseResponse<>(adminPostRes);
     }
+    @ResponseBody
+    @GetMapping("/post/detail/{postId}")
+    public BaseResponse<PostDetailRes> getPostDetail(@PathVariable Long postId)
+    {
+        PostDetailRes postDetailRes = adminService.getPostDetail(postId);
+        return new BaseResponse<>(postDetailRes);
+    }
+    @ResponseBody
+    @DeleteMapping("/post/delete/{postId}")
+    public BaseResponse<String> deletePost(@PathVariable("userId") Long userId){
+        adminService.deletePost(userId);
 
+        String result = "삭제 완료!!";
+        return new BaseResponse<>(result);
+    }
 }
