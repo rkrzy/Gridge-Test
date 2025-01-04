@@ -1,1 +1,2 @@
-20:59:32.629 WARN  [File:ExceptionAdvice.java] [Func:BaseExceptionHandle] [Line:16] [Message:BaseException. error message: 없는 아이디거나 비밀번호가 틀렸습니다.]- BaseException. error message: 없는 아이디거나 비밀번호가 틀렸습니다.
+10:47:22.379 WARN  [File:ExceptionAdvice.java] [Func:BaseExceptionHandle] [Line:16] [Message:BaseException. error message: 중복된 이메일입니다.]- BaseException. error message: 중복된 이메일입니다.
+10:50:56.750 WARN  [File:ExceptionAdvice.java] [Func:BaseExceptionHandle] [Line:16] [Message:BaseException. error message: JWT를 입력해주세요.]- BaseException. error message: JWT를 입력해주세요.

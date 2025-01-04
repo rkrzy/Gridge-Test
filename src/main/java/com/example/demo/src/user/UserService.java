@@ -5,13 +5,18 @@ package com.example.demo.src.user;
 import com.example.demo.common.entity.BaseEntity.State;
 import com.example.demo.common.exceptions.BaseException;
 import com.example.demo.src.user.entity.User;
+import com.example.demo.src.user.entity.specification.UserSpecification;
 import com.example.demo.src.user.model.*;
 import com.example.demo.utils.JwtService;
 import com.example.demo.utils.SHA256;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -88,14 +93,12 @@ public class UserService {
         return getUserResList;
     }
 
-
     @Transactional(readOnly = true)
     public GetUserRes getUser(Long userId) {
         User user = userRepository.findByIdAndState(userId, ACTIVE)
                 .orElseThrow(() -> new BaseException(NOT_FIND_USER));
         return new GetUserRes(user);
     }
-
     @Transactional(readOnly = true)
     public boolean checkUserByEmail(String email) {
         Optional<User> result = userRepository.findByEmailAndState(email, ACTIVE);
@@ -104,15 +107,9 @@ public class UserService {
     }
 
     public PostLoginRes logIn(PostLoginReq postLoginReq) {
-//        User user = userRepository.findByEmailAndState(postLoginReq.getEmail(), ACTIVE) //만약 Active 상태이면서 이메일이 존재하면 유저를 반환 아니면 반환하지 않는다.
-//                .orElseThrow(() -> new BaseException(NOT_FIND_USER));
-        User user = userRepository.findByEmail(postLoginReq.getEmail()).orElseThrow(() -> new BaseException(NOT_FIND_USER)); //만약에 존재하지 않는 유저라면 없다고 반환
+        User user = userRepository.findByEmailAndState(postLoginReq.getEmail(), ACTIVE) //만약 Active 상태이면서 이메일이 존재하면 유저를 반환 아니면 반환하지 않는다.
+                .orElseThrow(() -> new BaseException(NOT_FIND_USER));
         String encryptPwd;
-
-        if(user.getState() == INACTIVE)
-        {
-            throw new BaseException(RESPONSE_ERROR);
-        }
         try {
             encryptPwd = new SHA256().encrypt(postLoginReq.getPassword());
         } catch (Exception exception) {

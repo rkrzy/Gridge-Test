@@ -3,7 +3,6 @@ package com.example.demo.src.user;
 
 import com.example.demo.common.Constant.SocialLoginType;
 import com.example.demo.common.oauth.OAuthService;
-import com.example.demo.src.user.entity.User;
 import com.example.demo.utils.JwtService;
 import lombok.RequiredArgsConstructor;
 import com.example.demo.common.exceptions.BaseException;
@@ -13,9 +12,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.List;
 
 
+import static com.example.demo.common.entity.BaseEntity.*;
 import static com.example.demo.common.response.BaseResponseStatus.*;
 import static com.example.demo.utils.ValidationRegex.isRegexEmail;
 
@@ -51,6 +52,7 @@ public class UserController {
             return new BaseResponse<>(POST_USERS_INVALID_EMAIL);
         }
         PostUserRes postUserRes = userService.createUser(postUserReq);
+
         return new BaseResponse<>(postUserRes);
     }
 
@@ -104,7 +106,6 @@ public class UserController {
 
         String result = "수정 완료!!";
         return new BaseResponse<>(result);
-
     }
 
     /**
@@ -136,7 +137,7 @@ public class UserController {
         if(postLoginReq.getEmail()==null || postLoginReq.getEmail().isEmpty()){ //이메일이 비어있다면
             return new BaseResponse<>(USERS_EMPTY_EMAIL);
         }
-        if(!isRegexEmail(postLoginReq.getEmail())){
+        if(!isRegexEmail(postLoginReq.getEmail())){//이메일이 정규식에 부합하지 않다면
             return new BaseResponse<>(POST_USERS_INVALID_EMAIL);
         }
         PostLoginRes postLoginRes = userService.logIn(postLoginReq);

@@ -27,7 +27,14 @@ public class BaseEntity {
     @Column(name = "state", nullable = false, length = 10)
     protected State state = State.ACTIVE;
 
+    /**
+     * ACTIVE : 유저 활성화 상태
+     * INACTIVE : 유저 비활성화 상태
+     * WITHDRAW : 유저 탈퇴 상태
+     * BLOCK : 유저 차단 상태
+     * ADMIN : 유저 관리자 상태
+     */
     public enum State {
-        ACTIVE, INACTIVE;
+        ACTIVE, INACTIVE, WITHDRAW, BLOCK, ADMIN;
     }
 }
