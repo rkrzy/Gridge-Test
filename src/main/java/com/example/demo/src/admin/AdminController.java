@@ -45,6 +45,12 @@ public class AdminController {
         List<GetUserRes> getUsersRes = adminService.getUserByCondition(name,id,createDate,state);
         return new BaseResponse<>(getUsersRes);
     }
+
+    /**
+     * 유저의 모든 정보를 볼 수 있는 상세 조회
+     * @param userId
+     * @return
+     */
     @ResponseBody
     @GetMapping("/detail/{userId}")
     public BaseResponse<UserDetailRes> getUsersDetail(@PathVariable Long userId)
@@ -52,5 +58,15 @@ public class AdminController {
 
         UserDetailRes userDetailRes = adminService.getUserDetail(userId);
         return new BaseResponse<>(userDetailRes);
+    }
+    @ResponseBody
+    @GetMapping("/block/{userId}")
+    public BaseResponse<String> blockUser(@PathVariable Long userId){
+
+        adminService.blockUser(userId);
+
+        String str = "유저의 계정이 차단되었습니다.";
+
+        return new BaseResponse<>(str);
     }
 }

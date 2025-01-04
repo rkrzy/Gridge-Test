@@ -37,4 +37,8 @@ public class BaseEntity {
     public enum State {
         ACTIVE, INACTIVE, WITHDRAW, BLOCK, ADMIN;
     }
+
+    public void setState(State state) {
+        this.state = state;
+    }
 }

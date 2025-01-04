@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static com.example.demo.common.entity.BaseEntity.State.ACTIVE;
+import static com.example.demo.common.entity.BaseEntity.State.BLOCK;
 import static com.example.demo.common.response.BaseResponseStatus.*;
 
 @Transactional
@@ -70,10 +71,20 @@ public class AdminService {
                 .collect(Collectors.toList());
     }
 
-
+    /**
+     * 유저의 모든 정보를 볼 수 있는 상세조회 페이지
+     * @param id
+     * @return
+     */
     @Transactional(readOnly = true)
     public UserDetailRes getUserDetail(Long id){
         User user = userRepository.findById(id).orElseThrow(() -> new BaseException(NOT_FIND_USER));
         return new UserDetailRes(user);
+    }
+    @Transactional(readOnly = false)
+    public void blockUser(Long id){
+        User user = userRepository.findById(id).orElseThrow(() -> new BaseException(NOT_FIND_USER));
+
+        user.setState(BLOCK);
     }
 }
