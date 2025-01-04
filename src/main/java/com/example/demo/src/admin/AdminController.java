@@ -3,6 +3,8 @@ package com.example.demo.src.admin;
 
 import com.example.demo.common.entity.BaseEntity;
 import com.example.demo.common.response.BaseResponse;
+import com.example.demo.common.response.BaseResponseStatus;
+import com.example.demo.src.admin.model.UserDetailRes;
 import com.example.demo.src.user.model.GetUserRes;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -42,5 +44,13 @@ public class AdminController {
         // Get Users
         List<GetUserRes> getUsersRes = adminService.getUserByCondition(name,id,createDate,state);
         return new BaseResponse<>(getUsersRes);
+    }
+    @ResponseBody
+    @GetMapping("/detail/{userId}")
+    public BaseResponse<UserDetailRes> getUsersDetail(@PathVariable Long userId)
+    {
+
+        UserDetailRes userDetailRes = adminService.getUserDetail(userId);
+        return new BaseResponse<>(userDetailRes);
     }
 }

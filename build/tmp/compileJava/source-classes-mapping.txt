@@ -41,14 +41,15 @@ com/example/demo/DemoApplication.java
  com.example.demo.DemoApplication
 com/example/demo/common/config/SwaggerConfig.java
  com.example.demo.common.config.SwaggerConfig
-com/example/demo/src/user/model/GoogleUser.java
- com.example.demo.src.user.model.GoogleUser
+com/example/demo/src/test/entity/Comment.java
+ com.example.demo.src.test.entity.Comment
+ com.example.demo.src.test.entity.Comment$CommentBuilder
 com/example/demo/src/test/MemoRepository.java
  com.example.demo.src.test.MemoRepository
 com/example/demo/src/test/model/GetMemoDto.java
  com.example.demo.src.test.model.GetMemoDto
-com/example/demo/src/user/model/PostUserReq.java
- com.example.demo.src.user.model.PostUserReq
+com/example/demo/src/user/entity/specification/UserSpecification.java
+ com.example.demo.src.user.entity.specification.UserSpecification
 com/example/demo/src/test/TestDao.java
  com.example.demo.src.test.TestDao
 com/example/demo/src/test/model/PostCommentDto.java
@@ -67,18 +68,17 @@ com/example/demo/src/test/entity/Memo.java
  com.example.demo.src.test.entity.Memo$MemoBuilder
 com/example/demo/common/oauth/GoogleOauth.java
  com.example.demo.common.oauth.GoogleOauth
+com/example/demo/src/user/model/GoogleUser.java
+ com.example.demo.src.user.model.GoogleUser
+com/example/demo/src/admin/model/UserDetailRes.java
+ com.example.demo.src.admin.model.UserDetailRes
 com/example/demo/src/user/model/GetUserRes.java
  com.example.demo.src.user.model.GetUserRes
-com/example/demo/src/test/entity/Comment.java
- com.example.demo.src.test.entity.Comment
- com.example.demo.src.test.entity.Comment$CommentBuilder
+com/example/demo/src/user/model/PostUserReq.java
+ com.example.demo.src.user.model.PostUserReq
 com/example/demo/src/user/entity/User.java
  com.example.demo.src.user.entity.User
  com.example.demo.src.user.entity.User$UserBuilder
-com/example/demo/src/user/UserRepository.java
- com.example.demo.src.user.UserRepository
-com/example/demo/src/user/entity/specification/UserSpecification.java
- com.example.demo.src.user.entity.specification.UserSpecification
 com/example/demo/common/oauth/OAuthService.java
  com.example.demo.common.oauth.OAuthService
  com.example.demo.common.oauth.OAuthService$1
@@ -90,3 +90,5 @@ com/example/demo/src/user/UserController.java
  com.example.demo.src.user.UserController
 com/example/demo/src/admin/AdminController.java
  com.example.demo.src.admin.AdminController
+com/example/demo/src/user/UserRepository.java
+ com.example.demo.src.user.UserRepository

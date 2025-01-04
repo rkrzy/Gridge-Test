@@ -4,6 +4,7 @@ import com.example.demo.common.entity.BaseEntity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @EqualsAndHashCode(callSuper = false)
@@ -29,6 +30,9 @@ public class User extends BaseEntity {
     @Column(nullable = false)
     private boolean isOAuth;
 
+    @Column(nullable = true)
+    private LocalDateTime lastLogin;
+
     @Builder
     public User(Long id, String email, String password, String name, boolean isOAuth) {
         this.id = id;
@@ -38,6 +42,7 @@ public class User extends BaseEntity {
         this.isOAuth = isOAuth;
     }
 
+
     public void updateName(String name) {
         this.name = name;
     }
@@ -45,5 +50,7 @@ public class User extends BaseEntity {
     public void deleteUser() {
         this.state = State.INACTIVE;
     }
+
+    public void updateLastLogin(LocalDateTime lastLogin){this.lastLogin = lastLogin;}
 
 }

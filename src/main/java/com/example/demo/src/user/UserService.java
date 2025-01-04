@@ -119,6 +119,7 @@ public class UserService {
         if(user.getPassword().equals(encryptPwd)){
             Long userId = user.getId();
             String jwt = jwtService.createJwt(userId);
+            user.updateLastLogin(LocalDateTime.now());
             return new PostLoginRes(userId,jwt);
         } else{
             throw new BaseException(FAILED_TO_LOGIN);

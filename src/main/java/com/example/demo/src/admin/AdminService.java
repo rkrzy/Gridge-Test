@@ -1,6 +1,9 @@
 package com.example.demo.src.admin;
 
 import com.example.demo.common.entity.BaseEntity;
+import com.example.demo.common.exceptions.BaseException;
+import com.example.demo.common.response.BaseResponseStatus;
+import com.example.demo.src.admin.model.UserDetailRes;
 import com.example.demo.src.user.UserRepository;
 import com.example.demo.src.user.entity.User;
 import com.example.demo.src.user.entity.specification.UserSpecification;
@@ -17,6 +20,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static com.example.demo.common.entity.BaseEntity.State.ACTIVE;
+import static com.example.demo.common.response.BaseResponseStatus.*;
 
 @Transactional
 @RequiredArgsConstructor
@@ -64,5 +68,12 @@ public class AdminService {
         return users.stream()
                 .map(GetUserRes::new)
                 .collect(Collectors.toList());
+    }
+
+
+    @Transactional(readOnly = true)
+    public UserDetailRes getUserDetail(Long id){
+        User user = userRepository.findById(id).orElseThrow(() -> new BaseException(NOT_FIND_USER));
+        return new UserDetailRes(user);
     }
 }

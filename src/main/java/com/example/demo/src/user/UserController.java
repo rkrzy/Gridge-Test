@@ -141,6 +141,7 @@ public class UserController {
             return new BaseResponse<>(POST_USERS_INVALID_EMAIL);
         }
         PostLoginRes postLoginRes = userService.logIn(postLoginReq);
+
         return new BaseResponse<>(postLoginRes);
     }
 

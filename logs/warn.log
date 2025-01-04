@@ -1,2 +1,5 @@
 10:47:22.379 WARN  [File:ExceptionAdvice.java] [Func:BaseExceptionHandle] [Line:16] [Message:BaseException. error message: 중복된 이메일입니다.]- BaseException. error message: 중복된 이메일입니다.
 10:50:56.750 WARN  [File:ExceptionAdvice.java] [Func:BaseExceptionHandle] [Line:16] [Message:BaseException. error message: JWT를 입력해주세요.]- BaseException. error message: JWT를 입력해주세요.
+12:17:54.423 WARN  [File:ExceptionAdvice.java] [Func:BaseExceptionHandle] [Line:16] [Message:BaseException. error message: 일치하는 유저가 없습니다.]- BaseException. error message: 일치하는 유저가 없습니다.
+12:18:43.165 WARN  [File:ExceptionAdvice.java] [Func:BaseExceptionHandle] [Line:16] [Message:BaseException. error message: 일치하는 유저가 없습니다.]- BaseException. error message: 일치하는 유저가 없습니다.
+12:25:13.934 WARN  [File:ExceptionAdvice.java] [Func:BaseExceptionHandle] [Line:16] [Message:BaseException. error message: 중복된 이메일입니다.]- BaseException. error message: 중복된 이메일입니다.
