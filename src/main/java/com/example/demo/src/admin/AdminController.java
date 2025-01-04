@@ -4,6 +4,7 @@ package com.example.demo.src.admin;
 import com.example.demo.common.entity.BaseEntity;
 import com.example.demo.common.response.BaseResponse;
 import com.example.demo.common.response.BaseResponseStatus;
+import com.example.demo.src.admin.model.AdminPostRes;
 import com.example.demo.src.admin.model.UserDetailRes;
 import com.example.demo.src.user.model.GetUserRes;
 import lombok.RequiredArgsConstructor;
@@ -12,6 +13,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
+
+import static com.example.demo.common.entity.BaseEntity.*;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -31,11 +34,11 @@ public class AdminController {
      * @return
      */
     @ResponseBody
-    @GetMapping("/search") // (GET) 127.0.0.1:9000/app/users
+    @GetMapping("users/search") // (GET) 127.0.0.1:9000/app/users
     public BaseResponse<List<GetUserRes>> getUsers(@RequestParam(required = false) String name,
-                                                   @RequestParam(required = false) Integer id,
+                                                   @RequestParam(required = false) Long id,
                                                    @RequestParam(required = false) LocalDateTime createDate,
-                                                   @RequestParam(required = false) BaseEntity.State state) {
+                                                   @RequestParam(required = false) State state) {
 
         if(name == null && id == null && createDate == null && state == null){
             List<GetUserRes> getUsersRes = adminService.getUsers();
@@ -52,15 +55,14 @@ public class AdminController {
      * @return
      */
     @ResponseBody
-    @GetMapping("/detail/{userId}")
+    @GetMapping("users/detail/{userId}")
     public BaseResponse<UserDetailRes> getUsersDetail(@PathVariable Long userId)
     {
-
         UserDetailRes userDetailRes = adminService.getUserDetail(userId);
         return new BaseResponse<>(userDetailRes);
     }
     @ResponseBody
-    @GetMapping("/block/{userId}")
+    @GetMapping("users/block/{userId}")
     public BaseResponse<String> blockUser(@PathVariable Long userId){
 
         adminService.blockUser(userId);
@@ -69,4 +71,18 @@ public class AdminController {
 
         return new BaseResponse<>(str);
     }
+    @ResponseBody
+    @GetMapping("post/search")
+    public BaseResponse<List<AdminPostRes>> getPosts(@RequestParam(required = false) Long id,
+                                               @RequestParam(required = false) LocalDateTime createdTime,
+                                               @RequestParam(required = false) State state)
+    {
+        if(id == null && createdTime == null && state == null){
+            List<AdminPostRes> adminPostRes = adminService.getPosts();
+            return new BaseResponse<>(adminPostRes);
+        }
+        List<AdminPostRes> adminPostRes = adminService.getPostsByCondition(id, createdTime, state);
+        return new BaseResponse<>(adminPostRes);
+    }
+
 }

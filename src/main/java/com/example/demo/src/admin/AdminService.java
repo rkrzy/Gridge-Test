@@ -3,7 +3,11 @@ package com.example.demo.src.admin;
 import com.example.demo.common.entity.BaseEntity;
 import com.example.demo.common.exceptions.BaseException;
 import com.example.demo.common.response.BaseResponseStatus;
+import com.example.demo.src.admin.model.AdminPostRes;
 import com.example.demo.src.admin.model.UserDetailRes;
+import com.example.demo.src.post.PostRepository;
+import com.example.demo.src.post.entity.Post;
+import com.example.demo.src.post.entity.specification.PostSpecification;
 import com.example.demo.src.user.UserRepository;
 import com.example.demo.src.user.entity.User;
 import com.example.demo.src.user.entity.specification.UserSpecification;
@@ -19,6 +23,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static com.example.demo.common.entity.BaseEntity.*;
 import static com.example.demo.common.entity.BaseEntity.State.ACTIVE;
 import static com.example.demo.common.entity.BaseEntity.State.BLOCK;
 import static com.example.demo.common.response.BaseResponseStatus.*;
@@ -30,6 +35,7 @@ public class AdminService {
 
     private final UserRepository userRepository;
     private final JwtService jwtService;
+    private final PostRepository postRepository;
 
     @Transactional(readOnly = true)
     public List<GetUserRes> getUsers() {
@@ -48,7 +54,7 @@ public class AdminService {
      * @return User -> GetUserRes로 반환한 값
      */
     @Transactional(readOnly = true)
-    public List<GetUserRes> getUserByCondition(String name, Integer id, LocalDateTime createDateTime, BaseEntity.State state){
+    public List<GetUserRes> getUserByCondition(String name, Long id, LocalDateTime createDateTime, State state){
         Specification<User> spec = Specification.where(null);
 
         if (name != null) {
@@ -86,5 +92,35 @@ public class AdminService {
         User user = userRepository.findById(id).orElseThrow(() -> new BaseException(NOT_FIND_USER));
 
         user.setState(BLOCK);
+    }
+    @Transactional(readOnly = true)
+    public List<AdminPostRes> getPosts()
+    {
+        List<AdminPostRes> adminPostRes = postRepository.findAll().stream()
+                .map(AdminPostRes::new)
+                .collect(Collectors.toList());
+        return adminPostRes;
+    }
+    @Transactional(readOnly = true)
+    public List<AdminPostRes> getPostsByCondition(Long id, LocalDateTime createdDateTime, State state)
+    {
+        Specification<Post> spec = Specification.where(null);
+        if(id != null)
+        {
+            spec = spec.and(PostSpecification.equalsId(id));
+        }
+        if(createdDateTime != null){
+            spec = spec.and(PostSpecification.equalsCreatedDate(createdDateTime));
+        }
+        if(state != null){
+            spec = spec.and(PostSpecification.equalsState(state));
+        }
+        List<Post> posts = postRepository.findAll(spec);
+
+        posts.sort(Comparator.comparing(Post::getCreatedAt));
+        return posts.stream()
+                .map(AdminPostRes::new)
+                .collect(Collectors.toList());
+
     }
 }
