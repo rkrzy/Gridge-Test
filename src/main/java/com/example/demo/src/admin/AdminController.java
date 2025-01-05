@@ -5,6 +5,8 @@ import com.example.demo.common.response.BaseResponse;
 import com.example.demo.src.admin.model.AdminPostRes;
 import com.example.demo.src.admin.model.PostDetailRes;
 import com.example.demo.src.admin.model.UserDetailRes;
+import com.example.demo.src.post.PostService;
+import com.example.demo.src.reply.ReplyService;
 import com.example.demo.src.report.model.ReplyReportRes;
 import com.example.demo.src.report.model.PostReportRes;
 import com.example.demo.src.user.model.GetUserRes;
@@ -24,7 +26,8 @@ import static com.example.demo.common.entity.BaseEntity.*;
 public class AdminController {
 
     private final AdminService adminService;
-
+    private final PostService postService;
+    private final ReplyService replyService;
     /**
      * 4가지의 조건으로 유저를 검색
      * 생성일자를 기준으로 정렬해서 반환
@@ -102,8 +105,9 @@ public class AdminController {
     }
     @ResponseBody
     @DeleteMapping("/post/delete/{postId}")
-    public BaseResponse<String> deletePost(@PathVariable("userId") Long userId){
-        adminService.deletePost(userId);
+    public BaseResponse<String> deletePost(@PathVariable("userId") Long postId){
+
+        postService.deletePost(postId);
 
         String result = "삭제 완료!!";
         return new BaseResponse<>(result);
@@ -147,6 +151,25 @@ public class AdminController {
 
         String result = "게시글 신고가 삭제되었습니다 !";
 
+        return new BaseResponse<>(result);
+    }
+
+    @ResponseBody
+    @DeleteMapping("/report/post/{postId}")
+    public BaseResponse<String> deleteReportedPost(@PathVariable Long postId)
+    {
+        postService.deletePost(postId);
+
+        String result = "삭제 완료!!";
+        return new BaseResponse<>(result);
+    }
+    @ResponseBody
+    @DeleteMapping("/report/reply/{replyId}")
+    public BaseResponse<String> deleteReportedReply(@PathVariable Long replyId)
+    {
+        replyService.deleteReply(replyId);
+
+        String result = "삭제 완료!!";
         return new BaseResponse<>(result);
     }
 

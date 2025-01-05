@@ -137,12 +137,7 @@ public class AdminService {
         return new PostDetailRes(post);
 
     }
-    public void deletePost(Long id)
-    {
-        Post post = postRepository.findById(id)
-                .orElseThrow(() -> new BaseException(NOT_FIND_USER));
-        post.deletePost();
-    }
+
 
     @Transactional(readOnly = true)
     public List<ReplyReportRes> getReplyReport()

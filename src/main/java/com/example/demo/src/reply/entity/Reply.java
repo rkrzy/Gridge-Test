@@ -33,5 +33,8 @@ public class Reply extends BaseEntity {
     @JoinColumn(name = "post_id", nullable = false, unique = true)
     @OneToOne(fetch = FetchType.LAZY, optional = false)
     private Post post;
+    public void deleteReply(){
+        this.state = State.PRIVATE;
+    }
 
 }
