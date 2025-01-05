@@ -10,10 +10,10 @@ public class ReplyReportRes {
     private User user;
     private String content;
 
-    public ReplyReportRes(ReplyReport commentReport){
-        this.id = commentReport.getId();
-        this.replyId = commentReport.getComment().getId();
-        this.user = commentReport.getUser();
-        this.content = commentReport.getContent();
+    public ReplyReportRes(ReplyReport ReplyReport){
+        this.id = ReplyReport.getId();
+        this.replyId = ReplyReport.getReply().getId();
+        this.user = ReplyReport.getUser();
+        this.content = ReplyReport.getContent();
     }
 }

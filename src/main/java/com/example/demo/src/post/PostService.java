@@ -13,6 +13,7 @@ import com.example.demo.src.reply.ReplyRepository;
 import com.example.demo.src.reply.entity.Reply;
 import com.example.demo.src.reply.model.ReplyDetailDTO;
 import com.example.demo.src.user.UserRepository;
+import com.example.demo.src.user.entity.User;
 import com.example.demo.src.user.model.UserInfoDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -25,8 +26,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.example.demo.common.response.BaseResponseStatus.NOT_FIND_POST;
-import static com.example.demo.common.response.BaseResponseStatus.NOT_FIND_USER;
+import static com.example.demo.common.response.BaseResponseStatus.*;
 
 @Transactional
 @RequiredArgsConstructor
@@ -40,6 +40,19 @@ public class PostService {
     private final UserRepository userRepository;
     private final ProfileImageRepository profileImageRepository;
 
+    @Transactional
+    public void createPost(Long userId, String content){
+        User user = userRepository.findById(userId).orElseThrow(() -> new BaseException(NOT_FIND_USER));
+        Post post = new Post(user, content);
+        postRepository.save(post);
+    }
+    @Transactional
+    public void revisePost(Long postId, String content){
+        Post post = postRepository.findById(postId).orElseThrow(() -> new BaseException(NOT_FIND_POST));
+        post.setContent(content);
+
+    }
+    @Transactional
     public void deletePost(Long id)
     {
         Post post = postRepository.findById(id)

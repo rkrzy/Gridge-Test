@@ -30,7 +30,14 @@ public class Post extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     private User user;
 
+    public Post(User user, String content){
+        this.user = user;
+        this.content =content;
+    }
     public void deletePost(){
         this.state = State.PRIVATE;
+    }
+    public void setContent(String content){
+        this.content = content;
     }
 }
