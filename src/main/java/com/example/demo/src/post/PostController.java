@@ -35,7 +35,10 @@ public class PostController {
             return new BaseResponse<>(posts);
         }catch(BaseException e)
         {
+            if(e.getStatus() == EMPTY_JWT)
                 return new BaseResponse<>(USERS_NOT_LOGIN);
+            else
+                return new BaseResponse<>(INVALID_JWT);
         }
         catch(Exception e) {
         // 기타 예상치 못한 예외도 잡아서 응답 (선택적)
