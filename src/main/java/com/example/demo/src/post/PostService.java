@@ -110,22 +110,6 @@ public class PostService {
                 post.getCreatedAt()
         );
     }
-    @Transactional
-    public String clickLike(Long postId, Long userId)
-    {
-        Like exist = likeRepository.findByPostIdAndUserId(postId, userId);
-        if(exist == null)
-        {
-            Like like = new Like(
-                    userRepository.findById(userId).orElseThrow(()->new BaseException(NOT_FIND_USER)),
-                    postRepository.findById(postId).orElseThrow(()->new BaseException(NOT_FIND_POST)));
-            likeRepository.save(like);
-            return "좋아요가 생성되었습니다!";
-        }
-        else{
-            likeRepository.delete(exist);
-            return "좋아요가 지워졌습니다!";
-        }
-    }
+
 
 }
