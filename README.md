@@ -1,6 +1,16 @@
 # SpringBoot Template
 본 템플릿은 소프트스퀘어드 서버 교육용 Spring Boot 템플릿 입니다.
 
+# ERD Diagram
+## POST관련 ERD Diagram
+<img width="572" alt="POST관련" src="https://github.com/user-attachments/assets/86418553-6626-40a0-a8a9-7a4d1ec9864a" />
+
+## REPORT관련 ERD Diagram
+<img width="620" alt="REPORT관련" src="https://github.com/user-attachments/assets/45ed3c03-7fa1-40bb-aa45-5cbc98645c50" />
+
+## USER관련 ERD Diagram
+<img width="680" alt="USER관련" src="https://github.com/user-attachments/assets/1b6caa37-b702-44f1-a0bf-3d0666c214a9" />
+
 ## ✨Common
 ### REST API
 REST API를 처리하는 SpringBoot 프로젝트   
