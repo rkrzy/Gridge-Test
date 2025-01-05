@@ -1,5 +1,6 @@
 package com.example.demo.src.image;
 
+import com.example.demo.src.image.entity.Image;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

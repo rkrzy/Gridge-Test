@@ -1,6 +1,6 @@
 package com.example.demo.src.image.model;
 
-import com.example.demo.src.image.Image;
+import com.example.demo.src.image.entity.Image;
 
 public class ImageInfoDTO {
     Long id;

@@ -1,4 +1,4 @@
-package com.example.demo.src.image;
+package com.example.demo.src.image.entity;
 
 import com.example.demo.src.post.entity.Post;
 import lombok.AccessLevel;
