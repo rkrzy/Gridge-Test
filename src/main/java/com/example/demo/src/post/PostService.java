@@ -5,9 +5,11 @@ import com.example.demo.src.image.Image;
 import com.example.demo.src.image.ImageRepository;
 import com.example.demo.src.image.model.ImageInfoDTO;
 import com.example.demo.src.like.LikeRepository;
+import com.example.demo.src.like.entity.Like;
 import com.example.demo.src.post.entity.Post;
 import com.example.demo.src.post.model.PostDTO;
 import com.example.demo.src.reply.ReplyRepository;
+import com.example.demo.src.user.UserRepository;
 import com.example.demo.src.user.model.UserInfoDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -16,11 +18,11 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import static com.example.demo.common.response.BaseResponseStatus.NOT_FIND_POST;
+import static com.example.demo.common.response.BaseResponseStatus.NOT_FIND_USER;
 
 @Transactional
 @RequiredArgsConstructor
@@ -31,6 +33,7 @@ public class PostService {
     private final ImageRepository imageRepository;
     private final LikeRepository likeRepository;
     private final ReplyRepository replyRepository;
+    private final UserRepository userRepository;
 
     public void deletePost(Long id)
     {
@@ -40,6 +43,7 @@ public class PostService {
         post.deletePost();
     }
     public List<PostDTO> getPostList(Integer pageIndex, Integer size)
+
     {
         int page = (pageIndex == null || pageIndex < 1) ? 0 : pageIndex - 1;
         int pageSize = (size == null || size < 1) ? 10 : size;
@@ -72,5 +76,22 @@ public class PostService {
                 })
                 .collect(Collectors.toList());
         return postDTOS;
+    }
+    @Transactional
+    public String clickLike(Long postId, Long userId)
+    {
+        Like exist = likeRepository.findByPostIdAndUserId(postId, userId);
+        if(exist == null)
+        {
+            Like like = new Like(
+                    userRepository.findById(userId).orElseThrow(()->new BaseException(NOT_FIND_USER)),
+                    postRepository.findById(postId).orElseThrow(()->new BaseException(NOT_FIND_POST)));
+            likeRepository.save(like);
+            return "좋아요가 생성되었습니다!";
+        }
+        else{
+            likeRepository.delete(exist);
+            return "좋아요가 지워졌습니다!";
+        }
     }
 }
