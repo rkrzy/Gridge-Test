@@ -1,3 +1,21 @@
 .idea/
 *.iml
 out/
+# Ignore Gradle log files
+.gradle/
+build/
+
+# Ignore IntelliJ IDEA project files
+*.iml
+.idea/
+
+# Ignore Eclipse project files
+*.classpath
+*.project
+.settings/
+
+# Ignore MacOS-specific files
+.DS_Store
+
+# Ignore Windows-specific files
+Thumbs.db
