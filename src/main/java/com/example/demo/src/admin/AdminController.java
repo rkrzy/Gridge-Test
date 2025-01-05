@@ -72,6 +72,14 @@ public class AdminController {
 
         return new BaseResponse<>(str);
     }
+
+    /**여기서 부터 피드관리 admin
+     *
+     * @param id
+     * @param createdTime
+     * @param state
+     * @return
+     */
     @ResponseBody
     @GetMapping("post/search")
     public BaseResponse<List<AdminPostRes>> getPosts(@RequestParam(required = false) Long id,
@@ -100,11 +108,16 @@ public class AdminController {
         String result = "삭제 완료!!";
         return new BaseResponse<>(result);
     }
+
+    /**여기서부터 신고관리 admin
+     *
+     * @return
+     */
     @ResponseBody
     @GetMapping("/report/comment")
     public BaseResponse<List<ReplyReportRes>> getReplyReport()
     {
-        List<ReplyReportRes> commentReportRes = adminService.getCommentReport();
+        List<ReplyReportRes> commentReportRes = adminService.getReplyReport();
 
         return new BaseResponse<>(commentReportRes);
     }
@@ -116,5 +129,24 @@ public class AdminController {
 
         return new BaseResponse<>(postReportRes);
     }
+    @ResponseBody
+    @DeleteMapping("/report/reply/{replyReportId}")
+    public BaseResponse<String> deleteReplyReport(@PathVariable Long replyReportId)
+    {
+        adminService.deleteReplyReport(replyReportId);
 
+        String result = "댓글 신고가 삭제되었습니다 !";
+
+        return new BaseResponse<>(result);
+    }
+    @ResponseBody
+    @DeleteMapping("/report/reply/{commentReportId}")
+    public BaseResponse<String> deleteCommentReport(@PathVariable Long commentReportId)
+    {
+        adminService.deletePostReport(commentReportId);
+
+        String result = "게시글 신고가 삭제되었습니다 !";
+
+        return new BaseResponse<>(result);
+    }
 }

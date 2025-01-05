@@ -145,7 +145,7 @@ public class AdminService {
     }
 
     @Transactional(readOnly = true)
-    public List<ReplyReportRes> getCommentReport()
+    public List<ReplyReportRes> getReplyReport()
     {
         List<ReplyReport> commentReports = replyReportRepository.findAll();
 
@@ -166,4 +166,20 @@ public class AdminService {
                 .map(PostReportRes::new)
                 .collect(Collectors.toList());
     }
+
+    public void deleteReplyReport(Long relpyReportId)
+    {
+        ReplyReport replyReport = replyReportRepository.findById(relpyReportId)
+                .orElseThrow(() -> new BaseException(NOT_FIND_REPORT));
+
+        replyReportRepository.delete(replyReport);
+    }
+    public void deletePostReport(Long commentReportId)
+    {
+        PostReport postReport = postReportRepository.findById(commentReportId)
+                .orElseThrow(()->new BaseException(NOT_FIND_REPORT));
+
+        postReportRepository.delete(postReport);
+    }
+
 }
