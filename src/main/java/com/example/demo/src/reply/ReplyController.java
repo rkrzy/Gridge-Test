@@ -5,6 +5,7 @@ import com.example.demo.common.response.BaseResponse;
 import com.example.demo.src.reply.model.ReplyCreateRequestDTO;
 import com.example.demo.src.reply.model.ReplyDetailDTO;
 import com.example.demo.utils.JwtService;
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +21,7 @@ public class ReplyController {
 
     ReplyService replyService;
     private final JwtService jwtService;
+    @Operation(summary = "댓글 작성", description = "댓글을 작성한다.")
     @ResponseBody
     @GetMapping("/reply/{postId}")
     public BaseResponse<ReplyDetailDTO> leaveReply(@PathVariable Long postId,

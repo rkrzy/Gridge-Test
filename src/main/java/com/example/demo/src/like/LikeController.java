@@ -4,6 +4,7 @@ import com.example.demo.common.exceptions.BaseException;
 import com.example.demo.common.response.BaseResponse;
 import com.example.demo.src.post.PostService;
 import com.example.demo.utils.JwtService;
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +20,7 @@ public class LikeController {
 
     private final LikeService likeService;
     private final JwtService jwtService;
-
+    @Operation(summary = "좋아요 클릭", description = "좋아요를 눌렀을때.")
     @ResponseBody
     @PostMapping("/like/{postId}")
     public BaseResponse<String> clickLike(@PathVariable Long postId)

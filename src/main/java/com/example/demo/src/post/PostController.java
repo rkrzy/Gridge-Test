@@ -6,6 +6,7 @@ import com.example.demo.src.post.model.PostDTO;
 import com.example.demo.src.post.model.PostDetailDTO;
 import com.example.demo.src.reply.model.ReplyDetailDTO;
 import com.example.demo.utils.JwtService;
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
@@ -24,6 +25,7 @@ public class PostController {
 
     private final PostService postService;
     private final JwtService jwtService;
+    @Operation(summary = " 게시물 삭제", description = "게시물 아이디를 받아와서 삭제한다.")
     @ResponseBody
     @DeleteMapping("/delete/{postId}")
     public BaseResponse<String> deletePost(@PathVariable("postId")Long postId){
@@ -47,6 +49,7 @@ public class PostController {
 
 
     }
+    @Operation(summary = "게시물 등록", description = "게시물을 등록한다.")
     @ResponseBody
     @PostMapping("/register")
     public BaseResponse<String> register(
@@ -69,6 +72,7 @@ public class PostController {
             return new BaseResponse<>(UNEXPECTED_ERROR);
         }
     }
+    @Operation(summary = "게시물 리스트 출력", description = "게시물의 리스트를 출력한다.")
     @ResponseBody
     @GetMapping("")
     public BaseResponse<List<PostDTO>> getPosts(
@@ -92,6 +96,7 @@ public class PostController {
         return new BaseResponse<>(UNEXPECTED_ERROR);
         }
     }
+    @Operation(summary = "게시물 상세조회", description = "게시물 아이디를 상세조회한다.")
     @ResponseBody
     @GetMapping("{postId}")
     public BaseResponse<PostDetailDTO> getPostDetail(@PathVariable Long postId)
@@ -112,6 +117,7 @@ public class PostController {
             return new BaseResponse<>(UNEXPECTED_ERROR);
         }
     }
+    @Operation(summary = "게시물 수정", description = "게시물 아이디를 받아와서 수정한다.")
     @ResponseBody
     @PostMapping("revise/{postId}")
     public BaseResponse<String> revisePost(

@@ -10,6 +10,7 @@ import com.example.demo.src.reply.ReplyService;
 import com.example.demo.src.report.model.ReplyReportRes;
 import com.example.demo.src.report.model.PostReportRes;
 import com.example.demo.src.user.model.GetUserRes;
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
@@ -37,6 +38,7 @@ public class AdminController {
      * @param state
      * @return
      */
+    @Operation(summary = "유저 검색", description = "등록된 유저를 검색한다")
     @ResponseBody
     @GetMapping("users/search") // (GET) 127.0.0.1:9000/app/users
     public BaseResponse<List<GetUserRes>> getUsers(@RequestParam(required = false) String name,
@@ -58,6 +60,7 @@ public class AdminController {
      * @param userId
      * @return
      */
+    @Operation(summary = "유저 상세 조회", description = "유저 아이디를 받아서 유저 상세 조회")
     @ResponseBody
     @GetMapping("users/detail/{userId}")
     public BaseResponse<UserDetailRes> getUsersDetail(@PathVariable Long userId)
@@ -65,8 +68,9 @@ public class AdminController {
         UserDetailRes userDetailRes = adminService.getUserDetail(userId);
         return new BaseResponse<>(userDetailRes);
     }
+    @Operation(summary = "계정 차단", description = "유저의 계정을 차단")
     @ResponseBody
-    @GetMapping("users/block/{userId}")
+    @PostMapping("users/block/{userId}")
     public BaseResponse<String> blockUser(@PathVariable Long userId){
 
         adminService.blockUser(userId);
@@ -83,6 +87,7 @@ public class AdminController {
      * @param state
      * @return
      */
+    @Operation(summary = "게시물 검색", description = "다양한 조건을 입력받아서 게시물 검색.")
     @ResponseBody
     @GetMapping("post/search")
     public BaseResponse<List<AdminPostRes>> getPosts(@RequestParam(required = false) Long id,
@@ -96,6 +101,7 @@ public class AdminController {
         List<AdminPostRes> adminPostRes = adminService.getPostsByCondition(id, createdTime, state);
         return new BaseResponse<>(adminPostRes);
     }
+    @Operation(summary = "게시물 확인", description = "게시물의 디테일한 부분을 확인")
     @ResponseBody
     @GetMapping("/post/detail/{postId}")
     public BaseResponse<PostDetailRes> getPostDetail(@PathVariable Long postId)
@@ -103,6 +109,7 @@ public class AdminController {
         PostDetailRes postDetailRes = adminService.getPostDetail(postId);
         return new BaseResponse<>(postDetailRes);
     }
+    @Operation(summary = "게시물 삭제", description = "해당하는 게시물을 삭제")
     @ResponseBody
     @DeleteMapping("/post/delete/{postId}")
     public BaseResponse<String> deletePost(@PathVariable("postId") Long postId){
@@ -117,14 +124,16 @@ public class AdminController {
      *
      * @return
      */
+    @Operation(summary = "신고된 댓글 확인", description = "신고받은 댓글 전체확인.")
     @ResponseBody
-    @GetMapping("/report/comment")
+    @GetMapping("/report/reply")
     public BaseResponse<List<ReplyReportRes>> getReplyReport()
     {
         List<ReplyReportRes> commentReportRes = adminService.getReplyReport();
 
         return new BaseResponse<>(commentReportRes);
     }
+    @Operation(summary = "신고된 게시물 확인", description = "신고받은 게시물 전체확인.")
     @ResponseBody
     @GetMapping("/report/post")
     public BaseResponse<List<PostReportRes>> getPostReport()
@@ -133,6 +142,7 @@ public class AdminController {
 
         return new BaseResponse<>(postReportRes);
     }
+    @Operation(summary = "댓글신고 삭제", description = "댓글 신고 삭제")
     @ResponseBody
     @DeleteMapping("/report/reply/{replyReportId}")
     public BaseResponse<String> deleteReplyReport(@PathVariable Long replyReportId)
@@ -143,6 +153,7 @@ public class AdminController {
 
         return new BaseResponse<>(result);
     }
+    @Operation(summary = "게시물신고 삭제", description = "게시물 신고 삭제.")
     @ResponseBody
     @DeleteMapping("/report/post/{postReportId}")
     public BaseResponse<String> deletePostReport(@PathVariable Long postReportId)
@@ -154,6 +165,7 @@ public class AdminController {
         return new BaseResponse<>(result);
     }
 
+    @Operation(summary = "신고된 게시물 삭제", description = "게시물 아이디를 받아와서 삭제한다.")
     @ResponseBody
     @DeleteMapping("/report/reported-post/{postId}")
     public BaseResponse<String> deleteReportedPost(@PathVariable Long postId)
@@ -163,6 +175,7 @@ public class AdminController {
         String result = "삭제 완료!!";
         return new BaseResponse<>(result);
     }
+    @Operation(summary = "신고된 댓글 삭제", description = "댓글 아이디를 받아와서 삭제한다.")
     @ResponseBody
     @DeleteMapping("/report/reported-reply/{replyId}")
     public BaseResponse<String> deleteReportedReply(@PathVariable Long replyId)

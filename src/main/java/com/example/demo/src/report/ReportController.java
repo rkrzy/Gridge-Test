@@ -5,6 +5,7 @@ import com.example.demo.common.response.BaseResponse;
 import com.example.demo.src.post.model.PostDTO;
 import com.example.demo.src.report.model.ReportReq;
 import com.example.demo.utils.JwtService;
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
@@ -22,7 +23,7 @@ public class ReportController {
 
     private final ReportService reportService;
     private final JwtService jwtService;
-
+    @Operation(summary = "댓글 신고 등록")
     @ResponseBody
     @PostMapping("/reply/{replyId}")
     public BaseResponse<String> registerReplyReport(@PathVariable Long replyId,
@@ -43,6 +44,7 @@ public class ReportController {
             return new BaseResponse<>(UNEXPECTED_ERROR);
         }
     }
+    @Operation(summary = "게시물 신고 등록")
     @ResponseBody
     @PostMapping("/post/{postId}")
     public BaseResponse<String> registerPostReport(@PathVariable Long postId,

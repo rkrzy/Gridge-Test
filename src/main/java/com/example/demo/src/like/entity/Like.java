@@ -1,5 +1,6 @@
 package com.example.demo.src.like.entity;
 
+import com.example.demo.common.entity.BaseEntity;
 import com.example.demo.src.post.entity.Post;
 import com.example.demo.src.user.entity.User;
 import lombok.AccessLevel;
@@ -16,7 +17,7 @@ import javax.persistence.*;
 @Table(name = "HEART",
         uniqueConstraints = {@UniqueConstraint(columnNames = {"user_id", "post_id"})
 }) // Table 이름을 명시해주지 않으면 class 이름을 Table 이름으로 대체한다.
-public class Like {
+public class Like extends BaseEntity {
 
     @Id
     @Column(name = "id", nullable = false, updatable = false)
