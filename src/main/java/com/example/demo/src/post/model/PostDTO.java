@@ -11,8 +11,8 @@ public class PostDTO {
     private UserInfoDTO userInfo;
     private String content;
     private List<ImageInfoDTO> imageList;
-    private Long LikeCount;
-    private Long ReplyCount;
+    private Long likeCount;
+    private Long replyCount;
     private LocalDateTime createAt;
 
     public PostDTO(Long postId,
@@ -26,8 +26,8 @@ public class PostDTO {
         this.userInfo = userInfo;
         this.content = content;
         this.imageList = imageList;
-        LikeCount = likeCount;
-        ReplyCount = replyCount;
+        this.likeCount = likeCount;
+        this.replyCount = replyCount;
         this.createAt = createAt;
     }
 }
