@@ -1,4 +1,4 @@
-package com.example.demo.src.image.model;
+package com.example.demo.src.image;
 
 import com.example.demo.src.image.entity.ProfileImage;
 import org.springframework.data.jpa.repository.JpaRepository;
