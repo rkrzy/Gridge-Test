@@ -1,14 +1,18 @@
 package com.example.demo.src.admin;
 
-import com.example.demo.common.entity.BaseEntity;
 import com.example.demo.common.exceptions.BaseException;
-import com.example.demo.common.response.BaseResponseStatus;
 import com.example.demo.src.admin.model.AdminPostRes;
 import com.example.demo.src.admin.model.PostDetailRes;
 import com.example.demo.src.admin.model.UserDetailRes;
 import com.example.demo.src.post.PostRepository;
 import com.example.demo.src.post.entity.Post;
 import com.example.demo.src.post.entity.specification.PostSpecification;
+import com.example.demo.src.report.ReplyReportRepository;
+import com.example.demo.src.report.PostReportRepository;
+import com.example.demo.src.report.entity.ReplyReport;
+import com.example.demo.src.report.entity.PostReport;
+import com.example.demo.src.report.model.ReplyReportRes;
+import com.example.demo.src.report.model.PostReportRes;
 import com.example.demo.src.user.UserRepository;
 import com.example.demo.src.user.entity.User;
 import com.example.demo.src.user.entity.specification.UserSpecification;
@@ -35,8 +39,11 @@ import static com.example.demo.common.response.BaseResponseStatus.*;
 public class AdminService {
 
     private final UserRepository userRepository;
-    private final JwtService jwtService;
     private final PostRepository postRepository;
+    private final ReplyReportRepository replyReportRepository;
+    private final PostReportRepository postReportRepository;
+
+    private final JwtService jwtService;
 
     @Transactional(readOnly = true)
     public List<GetUserRes> getUsers() {
@@ -128,12 +135,35 @@ public class AdminService {
     {
         Post post = postRepository.findById(id).orElseThrow(() -> new BaseException(NOT_FIND_USER));
         return new PostDetailRes(post);
+
     }
     public void deletePost(Long id)
     {
         Post post = postRepository.findById(id)
                 .orElseThrow(() -> new BaseException(NOT_FIND_USER));
         post.deletePost();
+    }
 
+    @Transactional(readOnly = true)
+    public List<ReplyReportRes> getCommentReport()
+    {
+        List<ReplyReport> commentReports = replyReportRepository.findAll();
+
+        commentReports.sort(Comparator.comparing(ReplyReport::getCreatedAt));
+
+        return commentReports.stream()
+                .map(ReplyReportRes::new)
+                .collect(Collectors.toList());
+    }
+    @Transactional(readOnly = true)
+    public List<PostReportRes> getPostReport()
+    {
+        List<PostReport> postReports = postReportRepository.findAll();
+
+        postReports.sort(Comparator.comparing(PostReport::getCreatedAt));
+
+        return postReports.stream()
+                .map(PostReportRes::new)
+                .collect(Collectors.toList());
     }
 }

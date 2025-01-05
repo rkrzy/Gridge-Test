@@ -1,12 +1,12 @@
 package com.example.demo.src.admin;
 
 
-import com.example.demo.common.entity.BaseEntity;
 import com.example.demo.common.response.BaseResponse;
-import com.example.demo.common.response.BaseResponseStatus;
 import com.example.demo.src.admin.model.AdminPostRes;
 import com.example.demo.src.admin.model.PostDetailRes;
 import com.example.demo.src.admin.model.UserDetailRes;
+import com.example.demo.src.report.model.ReplyReportRes;
+import com.example.demo.src.report.model.PostReportRes;
 import com.example.demo.src.user.model.GetUserRes;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -100,4 +100,21 @@ public class AdminController {
         String result = "삭제 완료!!";
         return new BaseResponse<>(result);
     }
+    @ResponseBody
+    @GetMapping("/report/comment")
+    public BaseResponse<List<ReplyReportRes>> getReplyReport()
+    {
+        List<ReplyReportRes> commentReportRes = adminService.getCommentReport();
+
+        return new BaseResponse<>(commentReportRes);
+    }
+    @ResponseBody
+    @GetMapping("/report/post")
+    public BaseResponse<List<PostReportRes>> getPostReport()
+    {
+        List<PostReportRes> postReportRes = adminService.getPostReport();
+
+        return new BaseResponse<>(postReportRes);
+    }
+
 }
