@@ -6,7 +6,6 @@ import com.example.demo.src.image.entity.Image;
 import com.example.demo.src.image.ImageRepository;
 import com.example.demo.src.image.model.ImageInfoDTO;
 import com.example.demo.src.like.LikeRepository;
-import com.example.demo.src.like.entity.Like;
 import com.example.demo.src.post.entity.Post;
 import com.example.demo.src.post.model.PostDTO;
 import com.example.demo.src.post.model.PostDetailDTO;

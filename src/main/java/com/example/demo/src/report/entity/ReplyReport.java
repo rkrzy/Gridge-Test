@@ -14,7 +14,8 @@ import javax.persistence.*;
 @EqualsAndHashCode(callSuper = false)
 @Getter
 @Entity // 필수, Class 를 Database Table화 해주는 것이다
-@Table(name = "REPLYREPORT") // Table 이름을 명시해주지 않으면 class 이름을 Table 이름으로 대체한다.
+@Table(name = "REPLYREPORT",
+        uniqueConstraints = @UniqueConstraint(columnNames = {"user_id", "reply_id"})) // Table 이름을 명시해주지 않으면 class 이름을 Table 이름으로 대체한다.
 public class ReplyReport extends BaseEntity {
 
     @Id
@@ -32,6 +33,10 @@ public class ReplyReport extends BaseEntity {
 
     @JoinColumn(name = "comment_id", nullable = false)
     @OneToOne(fetch = FetchType.LAZY, optional = false)
-    private Reply comment;
-
+    private Reply reply;
+    public ReplyReport(User user, Reply reply, String content){
+        this.user = user;
+        this.reply =reply;
+        this.content = content;
+    }
 }
