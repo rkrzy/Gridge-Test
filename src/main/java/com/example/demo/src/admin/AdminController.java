@@ -105,7 +105,7 @@ public class AdminController {
     }
     @ResponseBody
     @DeleteMapping("/post/delete/{postId}")
-    public BaseResponse<String> deletePost(@PathVariable("userId") Long postId){
+    public BaseResponse<String> deletePost(@PathVariable("postId") Long postId){
 
         postService.deletePost(postId);
 
@@ -144,10 +144,10 @@ public class AdminController {
         return new BaseResponse<>(result);
     }
     @ResponseBody
-    @DeleteMapping("/report/post/{commentReportId}")
-    public BaseResponse<String> deletePostReport(@PathVariable Long commentReportId)
+    @DeleteMapping("/report/post/{postReportId}")
+    public BaseResponse<String> deletePostReport(@PathVariable Long postReportId)
     {
-        adminService.deletePostReport(commentReportId);
+        adminService.deletePostReport(postReportId);
 
         String result = "게시글 신고가 삭제되었습니다 !";
 
@@ -155,7 +155,7 @@ public class AdminController {
     }
 
     @ResponseBody
-    @DeleteMapping("/report/post/{postId}")
+    @DeleteMapping("/report/reported-post/{postId}")
     public BaseResponse<String> deleteReportedPost(@PathVariable Long postId)
     {
         postService.deletePost(postId);
@@ -164,7 +164,7 @@ public class AdminController {
         return new BaseResponse<>(result);
     }
     @ResponseBody
-    @DeleteMapping("/report/reply/{replyId}")
+    @DeleteMapping("/report/reported-reply/{replyId}")
     public BaseResponse<String> deleteReportedReply(@PathVariable Long replyId)
     {
         replyService.deleteReply(replyId);
