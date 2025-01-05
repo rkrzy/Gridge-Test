@@ -1,14 +1,16 @@
 package com.example.demo.src.image.model;
 
+import com.example.demo.src.image.Image;
+
 public class ImageInfoDTO {
     Long id;
     String imageURL;
     Long postId;
 
-    public ImageInfoDTO(Long id, String imageURL, Long postId)
+    public ImageInfoDTO(Image image)
     {
-        this.id = id;
-        this.imageURL = imageURL;
-        this.postId = postId;
+        this.id = image.getId();
+        this.imageURL = image.getImageUrl();
+        this.postId = image.getPost().getId();
     }
 }

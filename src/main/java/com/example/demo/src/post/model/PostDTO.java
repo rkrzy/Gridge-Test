@@ -15,4 +15,19 @@ public class PostDTO {
     private Long ReplyCount;
     private LocalDateTime createAt;
 
+    public PostDTO(Long postId,
+                   UserInfoDTO userInfo,
+                   String content,
+                   List<ImageInfoDTO> imageList,
+                   Long likeCount,
+                   Long replyCount,
+                   LocalDateTime createAt) {
+        this.postId = postId;
+        this.userInfo = userInfo;
+        this.content = content;
+        this.imageList = imageList;
+        LikeCount = likeCount;
+        ReplyCount = replyCount;
+        this.createAt = createAt;
+    }
 }
