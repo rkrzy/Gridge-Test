@@ -108,25 +108,25 @@ com/example/demo/src/post/entity/Post.java
  com.example.demo.src.post.entity.Post
 com/example/demo/src/test/CommentRepository.java
  com.example.demo.src.test.CommentRepository
-com/example/demo/src/comment/ReplyRepository.java
- com.example.demo.src.comment.ReplyRepository
-com/example/demo/src/report/entity/ReplyReport.java
- com.example.demo.src.report.entity.ReplyReport
-com/example/demo/src/report/model/PostReportRes.java
- com.example.demo.src.report.model.PostReportRes
-com/example/demo/src/comment/entity/Reply.java
- com.example.demo.src.comment.entity.Reply
-com/example/demo/src/report/entity/PostReport.java
- com.example.demo.src.report.entity.PostReport
-com/example/demo/src/report/ReplyReportRepository.java
- com.example.demo.src.report.ReplyReportRepository
-com/example/demo/src/comment/ReplyService.java
- com.example.demo.src.comment.ReplyService
-com/example/demo/src/report/model/ReplyReportRes.java
- com.example.demo.src.report.model.ReplyReportRes
-com/example/demo/src/admin/AdminService.java
- com.example.demo.src.admin.AdminService
 com/example/demo/src/admin/AdminController.java
  com.example.demo.src.admin.AdminController
-com/example/demo/src/comment/ReplyController.java
- com.example.demo.src.comment.ReplyController
+com/example/demo/src/report/ReplyReportRepository.java
+ com.example.demo.src.report.ReplyReportRepository
+com/example/demo/src/report/model/PostReportRes.java
+ com.example.demo.src.report.model.PostReportRes
+com/example/demo/src/admin/AdminService.java
+ com.example.demo.src.admin.AdminService
+com/example/demo/src/report/entity/PostReport.java
+ com.example.demo.src.report.entity.PostReport
+com/example/demo/src/report/model/ReplyReportRes.java
+ com.example.demo.src.report.model.ReplyReportRes
+com/example/demo/src/reply/ReplyRepository.java
+ com.example.demo.src.reply.ReplyRepository
+com/example/demo/src/reply/ReplyService.java
+ com.example.demo.src.reply.ReplyService
+com/example/demo/src/reply/ReplyController.java
+ com.example.demo.src.reply.ReplyController
+com/example/demo/src/report/entity/ReplyReport.java
+ com.example.demo.src.report.entity.ReplyReport
+com/example/demo/src/reply/entity/Reply.java
+ com.example.demo.src.reply.entity.Reply

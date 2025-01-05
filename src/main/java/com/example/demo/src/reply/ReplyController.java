@@ -1,4 +1,4 @@
-package com.example.demo.src.comment;
+package com.example.demo.src.reply;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

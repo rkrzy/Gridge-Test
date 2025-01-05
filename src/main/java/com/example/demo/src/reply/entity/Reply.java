@@ -1,4 +1,4 @@
-package com.example.demo.src.comment.entity;
+package com.example.demo.src.reply.entity;
 
 
 import com.example.demo.common.entity.BaseEntity;
@@ -15,7 +15,7 @@ import javax.persistence.*;
 @EqualsAndHashCode(callSuper = false)
 @Getter
 @Entity // 필수, Class 를 Database Table화 해주는 것이다
-@Table(name = "COMMENT") // Table 이름을 명시해주지 않으면 class 이름을 Table 이름으로 대체한다.
+@Table(name = "REPLY") // Table 이름을 명시해주지 않으면 class 이름을 Table 이름으로 대체한다.
 public class Reply extends BaseEntity {
 
     @Id
