@@ -35,6 +35,8 @@ public enum BaseResponseStatus {
     INVALID_USER_JWT(false,HttpStatus.FORBIDDEN.value(),"권한이 없는 유저의 접근입니다."),
     NOT_FIND_USER(false,HttpStatus.NOT_FOUND.value(),"일치하는 유저가 없습니다."),
     NOT_FIND_REPORT(false,HttpStatus.NOT_FOUND.value(),"일치하는 신고가 없습니다."),
+    NOT_FIND_POST(false,HttpStatus.NOT_FOUND.value(), "일치하는 게시물이 없습니다."),
+    NOT_FIND_REPLY(false,HttpStatus.NOT_FOUND.value(), "일치하는 댓글이 없습니다."),
     INVALID_OAUTH_TYPE(false, HttpStatus.BAD_REQUEST.value(), "알 수 없는 소셜 로그인 형식입니다."),
 
 
