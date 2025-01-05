@@ -22,6 +22,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -97,6 +98,7 @@ public class PostService {
                 .map(reply -> new ReplyDetailDTO(
                         reply, profileImageRepository.findByUserId(reply.getUser().getId())
                 ))
+                .sorted(Comparator.comparing(ReplyDetailDTO::getCreatedAt).reversed()) // 날짜순 정렬
                 .collect(Collectors.toList());
 
         long likeCount = likeRepository.findAllByPostId(post.getId()).stream().count();
