@@ -31,7 +31,7 @@ public class ReplyReport extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     private User user;
 
-    @JoinColumn(name = "comment_id", nullable = false)
+    @JoinColumn(name = "reply_id", nullable = false)
     @OneToOne(fetch = FetchType.LAZY, optional = false)
     private Reply reply;
     public ReplyReport(User user, Reply reply, String content){
