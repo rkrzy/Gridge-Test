@@ -3,6 +3,7 @@ package com.example.demo.src.reply.entity;
 
 import com.example.demo.common.entity.BaseEntity;
 import com.example.demo.src.post.entity.Post;
+import com.example.demo.src.reply.model.ReplyCreateRequestDTO;
 import com.example.demo.src.user.entity.User;
 import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
@@ -35,6 +36,12 @@ public class Reply extends BaseEntity {
     private Post post;
     public void deleteReply(){
         this.state = State.PRIVATE;
+    }
+    public Reply(User user, Post post, String content){
+        this.user = user;
+        this.post = post;
+        this.content = content;
+
     }
 
 }

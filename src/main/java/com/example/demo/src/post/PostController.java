@@ -4,6 +4,7 @@ import com.example.demo.common.exceptions.BaseException;
 import com.example.demo.common.response.BaseResponse;
 import com.example.demo.src.post.model.PostDTO;
 import com.example.demo.src.post.model.PostDetailDTO;
+import com.example.demo.src.reply.model.ReplyDetailDTO;
 import com.example.demo.utils.JwtService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -51,7 +52,6 @@ public class PostController {
     public BaseResponse<PostDetailDTO> getPostDetail(@PathVariable Long postId
     )
     {
-
         try{
             Long userId = jwtService.getUserId();
             PostDetailDTO postDetailDTO = postService.getPostDetail(postId);
@@ -68,7 +68,6 @@ public class PostController {
             return new BaseResponse<>(UNEXPECTED_ERROR);
         }
     }
-
     @ResponseBody
     @PostMapping("/like/{postId}")
     public BaseResponse<String> clickLike(@PathVariable Long postId)
@@ -89,4 +88,5 @@ public class PostController {
             return new BaseResponse<>(UNEXPECTED_ERROR);
         }
     }
+
 }
