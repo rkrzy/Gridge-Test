@@ -140,8 +140,8 @@ public class AdminController {
         return new BaseResponse<>(result);
     }
     @ResponseBody
-    @DeleteMapping("/report/reply/{commentReportId}")
-    public BaseResponse<String> deleteCommentReport(@PathVariable Long commentReportId)
+    @DeleteMapping("/report/post/{commentReportId}")
+    public BaseResponse<String> deletePostReport(@PathVariable Long commentReportId)
     {
         adminService.deletePostReport(commentReportId);
 
@@ -149,4 +149,5 @@ public class AdminController {
 
         return new BaseResponse<>(result);
     }
+
 }
