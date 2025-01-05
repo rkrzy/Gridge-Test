@@ -23,7 +23,29 @@ public class PostController {
 
     private final PostService postService;
     private final JwtService jwtService;
+    @ResponseBody
+    @DeleteMapping("/delete/{postId}")
+    public BaseResponse<String> deletePost(@PathVariable("postId")Long postId){
 
+        try{
+            Long userId = jwtService.getUserId();
+            postService.deletePost(postId);
+            String result = "삭제 완료!!";
+            return new BaseResponse<>(result);
+        }catch(BaseException e)
+        {
+            if(e.getStatus() == EMPTY_JWT)
+                return new BaseResponse<>(USERS_NOT_LOGIN);
+            else
+                return new BaseResponse<>(INVALID_JWT);
+        }
+        catch(Exception e) {
+            // 기타 예상치 못한 예외도 잡아서 응답 (선택적)
+            return new BaseResponse<>(UNEXPECTED_ERROR);
+        }
+
+
+    }
     @ResponseBody
     @GetMapping("")
     public BaseResponse<List<PostDTO>> getPosts(
